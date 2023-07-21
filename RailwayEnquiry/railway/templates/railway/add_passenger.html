@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+    <style>
+        .bar {
+            background-color:black;
+
+        }
+
+        .bar li a {
+            color: white;
+        }
+
+        .btnco {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .Body {
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: top;
+            align-items: center;
+
+            background-image: linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)),
+            url("{% static 'images/addT.jpg' %}");
+            color: white;
+        }
+
+        h1 {
+            display: flex;
+            justify-content: center;
+        }
+
+        con {
+            background-color: white;
+        }
+
+        .but {
+            display: flex;
+            justify-content: center;
+        }
+        a:hover{
+            background-color: blue;
+            text-decoration: none;
+           
+        }
+    </style>
+</head>
+
+<body>
+    <nav aria-label="breadcrumb bar">
+        <ol class="breadcrumb bar">
+            {% if request.user.is_authenticated %}
+            {% if request.user.is_superuser %}
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'addticket' %}">Add Ticket</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'addtrain' %}">Add Train</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'trainlist' %}">Train Schedule</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'ticketlist' %}">Ticket List</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'addpassenger' %}">Register Passenger</a></li>
+            <li class="breadcrumb-item"><a href="{%url 'logout' %}"> Logout</a></li>
+            {% else %}
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'addticket' %}">Add Ticket</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'addpassenger' %}">Register Passenger</a></li>
+            <li class="breadcrumb-item"><a href="{%url 'logout' %}"> Logout</a></li>
+            {% endif %}
+            {% else %}
+            <li class="breadcrumb-item"><a href=="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'login' %}">Login</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'register' %}">Register</a></li>
+            {% endif %}
+        </ol>
+    </nav>
+    <h1>Add Passenger</h1>
+    <div class="Body">
+
+        <div class="container con">
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="">Passenger</label>
+                    <input type="text" class="form-control" name="passenger" placeholder="Enter Your Name">
+                </div>
+                <div class="form-group">
+                    <label for="">Age</label>
+                    <input type="number" class="form-control" name="age" placeholder="Enter You Age">
+                </div>
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="text" class="form-control" name="email" placeholder="Enter You Email">
+                </div>
+                <div class="but">
+                    <button class="btn btn-primary" type="submit">Register</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
